@@ -1,3 +1,4 @@
+const http = require('http');
 const { WebSocketServer } = require('ws');
 
 const PORT = process.env.PORT || 8080;
@@ -5,7 +6,12 @@ const MAX_PLAYERS = 6;
 const GAME_DURATION = 60;
 const COUNTDOWN = 5;
 
-const wss = new WebSocketServer({ port: PORT });
+const httpServer = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
+  res.end('Animal Hole server is running');
+});
+
+const wss = new WebSocketServer({ server: httpServer });
 const rooms = new Map();
 let nextPlayerId = 1;
 
@@ -179,4 +185,6 @@ wss.on('connection', (ws) => {
   });
 });
 
-console.log(`Animal Hole server running on port ${PORT}`);
+httpServer.listen(PORT, () => {
+  console.log(`Animal Hole server running on port ${PORT}`);
+});
