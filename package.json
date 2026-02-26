@@ -1,0 +1,12 @@
+{
+  "name": "animal-hole-server",
+  "version": "1.0.0",
+  "description": "Animal Hole multiplayer WebSocket server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
